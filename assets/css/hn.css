@@ -11598,7 +11598,9 @@ pre .code {
 .section {
   padding: 80px 0;
 }
-
+.section-m {
+  padding: 0 0;
+}
 .section.bg-custom-gray {
   background: rgba(242, 244, 247, 0.15);
 }
