@@ -15,7 +15,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #F85C70;
+  --primary: #390651;
   --secondary: #6c757d;
   --success: #A3C14A;
   --info: #47D8E0;
@@ -11596,7 +11596,7 @@ pre .code {
 }
 
 .section {
-  padding: 80px 0;
+  padding: 30px 0;
 }
 .section-m {
   padding: 0 0;
