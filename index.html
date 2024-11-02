@@ -828,7 +828,7 @@
                     </div>
                 </div>
 
-                <div class="blog-card">
+                <!-- <div class="blog-card">
                     <div class="img-holder">
                         <img src="assets/imgs/HANA.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
                     </div>
@@ -849,7 +849,7 @@
                         <p>Successfully completed the Learning Journey "Discovering the Foundations of SAP Commerce Cloud and SAP S/4HANA Cloud Integrations". Developers, consultants, architects and administrators gained an overview of the features, capabilities and technical aspects of SAP Commerce Cloud and SAP S/4HANA Cloud integration.</p>
                         <a href="https://www.credly.com/badges/6f01224c-e882-4818-944a-b0f8e777fe25/linked_in?t=s9d2wh" class="read-more" target="_blank">Read more <i class="ti-angle-double-right"></i></a>
                     </div>
-                </div>
+                </div> -->
           
                 <div class="blog-card">
                     <div class="img-holder">
@@ -863,7 +863,7 @@
                         <a href="https://testautomationu.applitools.com/certificate/?id=369bc598" class="read-more" target="_blank">Read more <i class="ti-angle-double-right"></i></a>
                     </div>
                 </div>
-                
+<!--                 
                 <div class="blog-card">
                     <div class="img-holder">
                         <img src="assets/imgs/junit.png" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
@@ -874,8 +874,8 @@
                         <p>This certification focuses on JUnit 5, a widely-used testing framework in Java. It highlights advanced features for writing and executing tests, including annotations, test lifecycle management, and parameterized tests.</p>
                         <a href="https://testautomationu.applitools.com/certificate/?id=287da744" class="read-more" target="_blank">Read more <i class="ti-angle-double-right"></i></a>
                     </div>
-                </div>
-                <div class="blog-card">
+                </div> -->
+                <!-- <div class="blog-card">
                     <div class="img-holder">
                         <img src="assets/imgs/PM3.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
                     </div>
@@ -910,7 +910,7 @@
                         <a href="https://coursera.org/share/458721caa6052c9419d62a5ebc7a3a51" class="read-more" target="_blank">Read more <i class="ti-angle-double-right"></i></a>
                     </div>
                 </div>
-                
+                 -->
                 <div class="blog-card">
                     <div class="img-holder">
                         <img src="assets/imgs/DSA.jpg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
@@ -992,22 +992,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="contact-form-card">
-                        <h4 class="contact-title">Send a message</h4>
-                        <form action="form.php" method="post">
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="Name *" required name="Name">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="email" placeholder="Email *" required name="Email">
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" placeholder="Message *" rows="7" required name="Message"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="form-control btn btn-primary">Send Message</button>
-                            </div>
-                        </form>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Send a message</h4>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <input class="form-control" type="text" placeholder="Name *" required name="Name">
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" type="email" placeholder="Email *" required name="Email">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Message *" rows="7" required name="Message"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+                                </div>
+                            </form>
+                            <div id="messageStatus" class="mt-3" style="display: none;"></div>
+                        </div>
                     </div>
                 </div>
     
@@ -1060,6 +1063,36 @@
     </footer>
 
 	
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            var formData = new FormData(this);
+            
+            fetch('form.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                var messageStatus = document.getElementById('messageStatus');
+                messageStatus.style.display = 'block';
+                messageStatus.innerHTML = data;
+                messageStatus.className = 'mt-3 alert ' + (data.includes('successfully') ? 'alert-success' : 'alert-danger');
+                
+                if (data.includes('successfully')) {
+                    document.getElementById('contactForm').reset();
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                var messageStatus = document.getElementById('messageStatus');
+                messageStatus.style.display = 'block';
+                messageStatus.innerHTML = 'An error occurred. Please try again later.';
+                messageStatus.className = 'mt-3 alert alert-danger';
+            });
+        });
+        </script>
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
 
