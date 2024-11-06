@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->AltBody = "New Contact Form Submission\n\nName: $name\nEmail: $email\n\nMessage:\n$message";
 
         $mail->send();
-        echo json_encode('Message has been sent successfully. Thank you for contacting !');
+        echo json_encode("Message has been sent successfully. Thank you for contacting !");
     } catch (Exception $e) {
         echo json_encode(['status' => 'error', 'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo]);
     }
