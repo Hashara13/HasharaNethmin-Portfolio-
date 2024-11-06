@@ -1065,45 +1065,7 @@
     </footer>
 
 	
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            var formData = new FormData(this);
-            
-            fetch('form.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                var messageStatus = document.getElementById('messageStatus');
-                messageStatus.style.display = 'block';
-                messageStatus.innerHTML = data;
-                messageStatus.className = 'mt-3 alert ' + (data.includes('successfully') ? 'alert-success' : 'alert-danger');
-                
-                if (data.includes('successfully')) {
-                    document.getElementById('contactForm').reset();
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                var messageStatus = document.getElementById('messageStatus');
-                messageStatus.style.display = 'block';
-                messageStatus.innerHTML = 'An error occurred. Please try again later.';
-                messageStatus.className = 'mt-3 alert alert-danger';
-            });
-        });
-
-        function setActive(element) {
-    document.querySelectorAll('.portfolio .filters .filter-button').forEach((button) => {
-        button.classList.remove('active');
-    });
-    element.classList.add('active');
-}
-
-
-        </script>
+    <script src="assets/js/hn.js"></script>
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
 

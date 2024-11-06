@@ -133,3 +133,42 @@ function initMap() {
       ]
     });
 }
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      var formData = new FormData(this);
+      
+      fetch('form.php', {
+          method: 'POST',
+          body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+          var messageStatus = document.getElementById('messageStatus');
+          messageStatus.style.display = 'block';
+          messageStatus.innerHTML = data;
+          messageStatus.className = 'mt-3 alert ' + (data.includes('successfully') ? 'alert-success' : 'alert-danger');
+          
+          if (data.includes('successfully')) {
+              document.getElementById('contactForm').reset();
+          }
+      })
+      .catch(error => {
+          console.error('Error:', error);
+          var messageStatus = document.getElementById('messageStatus');
+          messageStatus.style.display = 'block';
+          messageStatus.innerHTML = 'An error occurred. Please try again later.';
+          messageStatus.className = 'mt-3 alert alert-danger';
+      });
+  });
+
+  document.querySelectorAll('.portfolio .filters .filter-button').forEach((button) => {
+      button.addEventListener('click', function() {
+          document.querySelectorAll('.portfolio .filters .filter-button').forEach((btn) => {
+              btn.classList.remove('active');
+          });
+          this.classList.add('active');
+      });
+  });
+});
