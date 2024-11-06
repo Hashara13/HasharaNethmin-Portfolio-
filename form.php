@@ -9,9 +9,11 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $config = [
-    'gmail_username' => $_ENV['GMAIL_USERNAME'] ?? '',
+    'gmail_username' => $_ENV['GMAIL_USERNAME'] ?? '', 
     'gmail_password' => $_ENV['GMAIL_PASSWORD'] ?? '',
-    'to_email' => $_ENV['TO_EMAIL'] ?? ''
+    'to_email' => $_ENV['TO_EMAIL'] ?? '', 
+    'mailgun_api_key' => $_ENV['MAILGUN_API_KEY'] ?? '', 
+    'mailgun_domain' => $_ENV['MAILGUN_DOMAIN'] ?? ''
 ];
 
 $name = $email = $message = '';
@@ -30,14 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       = 'smtp.mailgun.org'; 
         $mail->SMTPAuth   = true;
-        $mail->Username   = $config['gmail_username'];
-        $mail->Password   = $config['gmail_password'];
+        $mail->Username   = 'postmaster@' . $config['mailgun_domain']; 
+        $mail->Password   = $config['mailgun_api_key']; 
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
-        $mail->setFrom($config['gmail_username'], 'Contact Form');
+        $mail->setFrom('postmaster@' . $config['mailgun_domain'], 'Contact Form');
         $mail->addAddress($config['to_email']);
         $mail->addReplyTo($email, $name);
 
@@ -52,11 +54,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->AltBody = "New Contact Form Submission\n\nName: $name\nEmail: $email\n\nMessage:\n$message";
 
         $mail->send();
-        echo json_encode("Message has been sent successfully. Thank you for contacting !");
+        echo json_encode("Message has been sent successfully via Mailgun. Thank you for contacting!");
     } catch (Exception $e) {
-        echo json_encode(['status' => 'error', 'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo]);
+        try {
+            $mail->clearAddresses();
+            $mail->clearReplyTos();
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com'; 
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $config['gmail_username']; 
+            $mail->Password   = $config['gmail_password']; 
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+
+            $mail->setFrom($config['gmail_username'], 'Contact Form');
+            $mail->addAddress($config['to_email']);
+            $mail->addReplyTo($email, $name);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'New message from Contact Form';
+            $mail->Body    = "
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
+                <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
+                <p><strong>Message:</strong><br>" . nl2br(htmlspecialchars($message)) . "</p>
+            ";
+            $mail->AltBody = "New Contact Form Submission\n\nName: $name\nEmail: $email\n\nMessage:\n$message";
+
+            $mail->send();
+            echo json_encode("Message has been sent successfully via Gmail. Thank you for contacting!");
+        } catch (Exception $e) {
+            echo json_encode(['status' => 'error', 'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo]);
+        }
     }
 } else {
     header("Location: index.html");
     exit();
 }
+?>
