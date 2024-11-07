@@ -1,94 +1,82 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use Dotenv\Dotenv;
-
 require 'vendor/autoload.php';
 
-$dotenv = Dotenv::createImmutable(__DIR__);
-$dotenv->load();
+use Dotenv\Dotenv;
+use SendGrid\Mail\Mail;
+
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+function logError($message) {
+    error_log(date('[Y-m-d H:i:s] ') . $message . "\n", 3, 'error.log');
+}
+
+try {
+    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
+} catch (Exception $e) {
+    logError('Error loading .env file: ' . $e->getMessage());
+    echo 'An error occurred while loading configuration.';
+    exit;
+}
 
 $config = [
-    'gmail_username' => $_ENV['GMAIL_USERNAME'] ?? '', 
-    'gmail_password' => $_ENV['GMAIL_PASSWORD'] ?? '',
-    'to_email' => $_ENV['TO_EMAIL'] ?? '', 
-    'mailgun_api_key' => $_ENV['MAILGUN_API_KEY'] ?? '', 
-    'mailgun_domain' => $_ENV['MAILGUN_DOMAIN'] ?? ''
+    'sendgrid_api_key' => $_ENV['SENDGRID_API_KEY'] ?? '',
+    'from_email' => $_ENV['FROM_EMAIL'] ?? '',
+    'to_email' => $_ENV['TO_EMAIL'] ?? ''
 ];
 
-$name = $email = $message = '';
+if (empty($config['sendgrid_api_key']) || empty($config['from_email']) || empty($config['to_email'])) {
+    logError('Missing required configuration in .env file');
+    echo 'Server configuration error. Please contact the administrator.';
+    exit;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = filter_input(INPUT_POST, 'Name', FILTER_SANITIZE_STRING);
-    $email = filter_input(INPUT_POST, 'Email', FILTER_SANITIZE_EMAIL);
-    $message = filter_input(INPUT_POST, 'Message', FILTER_SANITIZE_STRING);
+    $name = htmlspecialchars($_POST['Name'] ?? '', ENT_QUOTES, 'UTF-8');
+    $email = filter_var($_POST['Email'] ?? '', FILTER_SANITIZE_EMAIL);
+    $message = htmlspecialchars($_POST['Message'] ?? '', ENT_QUOTES, 'UTF-8');
 
     if (!$name || !$email || !$message || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(['status' => 'error', 'message' => 'Invalid input. Please check your form and try again.']);
+        echo 'Invalid input. Please check your form and try again.';
         exit;
     }
 
-    $mail = new PHPMailer(true);
+    $email_body = "
+    <h2>New Contact Form Submission</h2>
+    <p><strong>Name:</strong> {$name}</p>
+    <p><strong>Email:</strong> {$email}</p>
+    <p><strong>Message:</strong><br>" . nl2br($message) . "</p>
+    <br>
+    <p>--</p>
+    <p>This email was sent from our contact form.</p>
+    <p>Company Address: 123 Example Street, Colombo, Sri Lanka</p>
+";
+
+
+    $email = new Mail();
+    $email->setFrom($config['from_email'], "Contact Form");
+    $email->setSubject("New message from Contact Form");
+    $email->addTo($config['to_email']);
+    $email->addContent("text/plain", strip_tags($email_body));
+    $email->addContent("text/html", $email_body);
+
+    $sendgrid = new \SendGrid($config['sendgrid_api_key']);
 
     try {
-        $mail->isSMTP();
-        $mail->Host       = 'smtp.mailgun.org'; 
-        $mail->SMTPAuth   = true;
-        $mail->Username   = 'postmaster@' . $config['mailgun_domain']; 
-        $mail->Password   = $config['mailgun_api_key']; 
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->Port       = 587;
+        $response = $sendgrid->send($email);
+        logError('SendGrid API Response: ' . $response->statusCode() . ' - ' . $response->body());
 
-        $mail->setFrom('postmaster@' . $config['mailgun_domain'], 'Contact Form');
-        $mail->addAddress($config['to_email']);
-        $mail->addReplyTo($email, $name);
-
-        $mail->isHTML(true);
-        $mail->Subject = 'New message from Contact Form';
-        $mail->Body    = "
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
-            <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
-            <p><strong>Message:</strong><br>" . nl2br(htmlspecialchars($message)) . "</p>
-        ";
-        $mail->AltBody = "New Contact Form Submission\n\nName: $name\nEmail: $email\n\nMessage:\n$message";
-
-        $mail->send();
-        echo json_encode("Message has been sent successfully via Mailgun. Thank you for contacting!");
-    } catch (Exception $e) {
-        try {
-            $mail->clearAddresses();
-            $mail->clearReplyTos();
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com'; 
-            $mail->SMTPAuth   = true;
-            $mail->Username   = $config['gmail_username']; 
-            $mail->Password   = $config['gmail_password']; 
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port       = 587;
-
-            $mail->setFrom($config['gmail_username'], 'Contact Form');
-            $mail->addAddress($config['to_email']);
-            $mail->addReplyTo($email, $name);
-
-            $mail->isHTML(true);
-            $mail->Subject = 'New message from Contact Form';
-            $mail->Body    = "
-                <h2>New Contact Form Submission</h2>
-                <p><strong>Name:</strong> " . htmlspecialchars($name) . "</p>
-                <p><strong>Email:</strong> " . htmlspecialchars($email) . "</p>
-                <p><strong>Message:</strong><br>" . nl2br(htmlspecialchars($message)) . "</p>
-            ";
-            $mail->AltBody = "New Contact Form Submission\n\nName: $name\nEmail: $email\n\nMessage:\n$message";
-
-            $mail->send();
-            echo json_encode("Message has been sent successfully via Gmail. Thank you for contacting!");
-        } catch (Exception $e) {
-            echo json_encode(['status' => 'error', 'message' => 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo]);
+        if ($response->statusCode() == 202) {
+            echo "Message has been sent successfully via SendGrid. Thank you for contacting!";
+        } else {
+            echo 'Message could not be sent. Please try again later.';
         }
+    } catch (Exception $e) {
+        logError('SendGrid Error: ' . $e->getMessage());
+        echo 'Message could not be sent. Please try again later.';
     }
 } else {
     header("Location: index.html");
     exit();
 }
-?>

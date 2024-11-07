@@ -1,0 +1,7 @@
+[2024-11-07 13:53:51] SendGrid Error: Could not send request to server. CURL error 60: SSL certificate problem: self-signed certificate in certificate chain
+[2024-11-07 13:55:14] SendGrid Error: Could not send request to server. CURL error 60: SSL certificate problem: self-signed certificate in certificate chain
+[2024-11-07 13:59:13] SendGrid Error: Could not send request to server. CURL error 60: SSL certificate problem: self-signed certificate in certificate chain
+[2024-11-07 13:59:47] SendGrid Error: Could not send request to server. CURL error 60: SSL certificate problem: self-signed certificate in certificate chain
+[2024-11-07 14:00:15] SendGrid Error: Could not send request to server. CURL error 60: SSL certificate problem: self-signed certificate in certificate chain
+[2024-11-07 14:01:09] SendGrid Error: Could not send request to server. CURL error 60: SSL certificate problem: self-signed certificate in certificate chain
+[2024-11-07 14:05:51] SendGrid Error: Could not send request to server. CURL error 60: SSL certificate problem: self-signed certificate in certificate chain
