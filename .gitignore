@@ -1,4 +1,5 @@
 config.php
+.log
 .env
 vendor/
 .htaccess
