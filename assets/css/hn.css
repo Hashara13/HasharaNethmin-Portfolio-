@@ -11250,7 +11250,8 @@ p {
   padding-right: 0;
   margin: 10px -5px;
   overflow: hidden;
-  border-radius: 2px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 18px;
   -webkit-backface-visibility: hidden;
           backface-visibility: hidden;
 }
@@ -11281,6 +11282,7 @@ p {
   padding: 0 20px;
   color: #fff;
   opacity: 0;
+  
   visibility: hidden;
   transition: 0.5s;
   -webkit-transition: 0.5s;
