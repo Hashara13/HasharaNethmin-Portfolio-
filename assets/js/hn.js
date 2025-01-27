@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     messageStatus.textContent = "Sending...";
     messageStatus.style.color = "gray";
 
-    emailjs.send("service_92xc50r", "template_xs2240w", formObject).then(
+    emailjs.send("service_92xc50r", "template_s4t3xop", formObject).then(
       function () {
         messageStatus.textContent = "Message sent successfully!";
         messageStatus.style.color = "green";
