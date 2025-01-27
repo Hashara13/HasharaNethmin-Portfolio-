@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const messageStatus = document.getElementById("messageStatus");
     messageStatus.style.display = "block";
     messageStatus.textContent = "Sending...";
-    messageStatus.style.color = "blue";
+    messageStatus.style.color = "gray";
 
     emailjs.send("service_92xc50r", "template_xs2240w", formObject).then(
       function () {
