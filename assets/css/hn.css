@@ -11372,7 +11372,7 @@ p {
   color: #2d3748;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 948px) {
   .skills-grid {
       grid-template-columns: 1fr;
       gap: 1.5rem;
@@ -11576,10 +11576,14 @@ p {
 }
 
 @media (max-width: 768px) {
+  .certification-card{
+    border: 2px solid #efefef;}
   .certification-grid,  .certification-grid2 {
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   }
 }
+
+
 .blog-card {
   display: -webkit-box;
   display: -webkit-flex;
