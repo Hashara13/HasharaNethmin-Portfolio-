@@ -11337,10 +11337,18 @@ p {
   color: #fffdfd;
 }
 
-.skill-content, .skill-content2 {
+.skill-content {
   display: grid;
+  padding: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
   gap: 1rem;
+}
+
+.skill-content2 {
+  display: grid;
+  padding: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
 }
 .skill-item {
   display: flex;
@@ -11370,16 +11378,14 @@ p {
 
 @media (max-width: 768px) {
   .skills-grid {
-    grid-template-columns: 1fr; /* Single column layout */
+    grid-template-columns: 1fr; 
   }
 
   .skill-content {
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
   }
 
-  .skill-content2 {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-  }
+
 
   .skill-card {
     width: 100%;
@@ -11387,7 +11393,17 @@ p {
     margin: 0 auto;
   }
 }
+@media (max-width: 768px) {
+  .skill-content2 {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
 
+@media (max-width: 480px) {
+  .skill-content2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 @keyframes fadeIn {
   from {
       opacity: 0;
