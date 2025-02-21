@@ -11372,7 +11372,6 @@ p {
   color: #2d3748;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .skills-grid {
       grid-template-columns: 1fr;
@@ -11385,14 +11384,13 @@ p {
   }
 
   .skill-content {
-      grid-template-columns: repeat(3, minmax(90px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   }
   .skill-content2 {
-    grid-template-columns: repeat(3, minmax(90px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 }
 }
 
-/* Animation for skill items */
 @keyframes fadeIn {
   from {
       opacity: 0;
