@@ -11155,7 +11155,7 @@ p {
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  width:90%;
+  width:100%;
   max-width: 100%;
   margin: 20px auto;
   border-radius: 12px;
@@ -11478,6 +11478,10 @@ p {
 .highlight {
   color: #dc3545;
 }
+
+
+
+
 
 .certification-grid {
   display: grid;
