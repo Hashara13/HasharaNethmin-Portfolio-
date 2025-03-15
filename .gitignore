@@ -5,3 +5,4 @@ config.php
 vendor/
 .htaccess
 form.php
+.qodo
