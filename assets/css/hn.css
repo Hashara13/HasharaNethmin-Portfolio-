@@ -11160,13 +11160,12 @@ p {
   margin: 20px auto;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  background-color: #f8f9fa;
 }
 
 .portfolio .filters .filter-button {
   flex: 1;
   text-align: center;
-  color: #495057;
+  color: #d95b66;
   width: 80%;
   font-size: 18px;
   font-weight: 500;
@@ -11760,13 +11759,13 @@ pre .code {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   -weblit-transform: translate(-50%, -50%);
-  border: 10px solid white;
+  border: 3px solid white;
   -webkit-transition: .5s !important;
   transition: .5s !important;
   -weblit-transition: .5s !important;
   z-index: 2;
   box-shadow: 0 5px 1px rgba(128, 128, 128, 0.13);
-  width: 190px;
+  width: 150px;
   border-radius: 50%;
 }
 
@@ -11841,8 +11840,8 @@ pre .code {
   position: relative;
   height: 80vh;
   min-height: 600px;
-  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/cvr.jpg);
-  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/cvr.jpg);
+  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/cvv.jpg);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../imgs/cvv.jpg);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12019,4 +12018,693 @@ pre .code {
   background: #F85C70;
   display: block;
   margin-top: 10px;
+}
+/* =========================================================
+   PERMANENT DARK THEME
+   ========================================================= */
+
+   :root {
+    --dark-bg: #0d1117;
+    --dark-section: #111820;
+    --dark-card: #161d27;
+    --dark-card-hover: #1c2532;
+
+    --dark-border: #2a3441;
+
+    --text-primary: #f0f3f6;
+    --text-secondary: #b8c0cc;
+    --text-muted: #8b949e;
+
+    --accent: #F85C70;
+}
+
+
+/* =========================
+   GLOBAL
+   ========================= */
+
+html,
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-secondary);
+}
+
+body {
+    color: var(--text-secondary);
+    background-color: var(--dark-bg);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--text-primary);
+}
+
+p {
+    color: var(--text-secondary);
+}
+
+hr {
+    border-top: 1px solid var(--dark-border);
+}
+
+a {
+    color: var(--accent);
+}
+
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar,
+.navbar.bg-white {
+    background-color: #0d1117 !important;
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.navbar .nav-link {
+    color: var(--text-secondary) !important;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: var(--accent) !important;
+}
+
+.navbar .brand .brand-txt .brand-title {
+    color: var(--text-primary);
+}
+
+.navbar .brand .brand-txt .brand-subtitle {
+    color: var(--text-muted);
+}
+
+
+/* mobile menu icon */
+
+.navbar-toggler {
+    border-color: var(--dark-border) !important;
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+
+/* =========================
+   ABOUT
+   ========================= */
+
+.container-fluid {
+    background-color: var(--dark-bg);
+}
+
+.about-section {
+    background-color: var(--dark-bg);
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.about-section .about-card {
+    background-color: var(--dark-bg);
+    border-right: 1px solid var(--dark-border);
+}
+
+.about-section h3,
+.about-section h5,
+.about-section h6 {
+    color: var(--text-primary);
+}
+
+.about-section p,
+.about-section .subtitle {
+    color: var(--text-secondary);
+}
+
+.about-section a {
+    color: var(--text-secondary);
+}
+
+.about-section a:hover {
+    color: var(--accent);
+}
+
+
+/* =========================
+   NORMAL SECTIONS
+   ========================= */
+
+.section {
+    background-color: var(--dark-bg);
+    color: var(--text-secondary);
+}
+
+.section.bg-custom-gray {
+    background: var(--dark-section) !important;
+}
+
+.section h2 {
+    color: var(--text-primary);
+}
+
+
+/* =========================
+   PROJECTS
+   ========================= */
+
+.portfolio {
+    background-color: transparent;
+}
+
+.portfolio .filters a {
+    color: var(--text-secondary);
+}
+
+.portfolio .filters a:hover,
+.portfolio .filters a.active {
+    color: var(--accent);
+}
+
+.portfolio .portfolio-container .portfolio-item {
+    background-color: var(--dark-card);
+}
+
+
+/* =========================
+   SKILLS
+   ========================= */
+
+.skills-section {
+    background-color: var(--dark-bg);
+}
+
+.skill-card {
+    background: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.skill-card:hover {
+    background: var(--dark-card-hover);
+}
+
+.skill-header {
+    background: var(--accent);
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.skill-header h3 {
+    color: #ffffff;
+}
+
+.skill-icon {
+    color: var(--text-secondary);
+}
+
+.skill-item span {
+    color: var(--text-secondary);
+}
+
+.skill-item:hover .skill-icon,
+.skill-item:hover span {
+    color: var(--accent);
+}
+
+
+/* =========================
+   CERTIFICATIONS
+   ========================= */
+
+.certifications {
+    background-color: var(--dark-bg);
+}
+
+.certification-card {
+    background-color: var(--dark-card);
+    border: 1px solid var(--dark-border);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+}
+
+.certification-card:hover {
+    background-color: var(--dark-card-hover);
+}
+
+.card-content h3 {
+    color: var(--text-primary);
+}
+
+.card-content p {
+    color: var(--text-secondary);
+}
+
+.card-content strong,
+.certificate-footer strong {
+    color: var(--text-secondary);
+}
+
+.view-certificate {
+    color: var(--text-muted);
+}
+
+.view-certificate:hover {
+    color: var(--accent);
+}
+
+
+/* =========================
+   GENERAL BOOTSTRAP CARDS
+   ========================= */
+
+.card,
+.card-body {
+    background-color: var(--dark-card);
+    color: var(--text-secondary);
+    border-color: var(--dark-border);
+}
+
+.card-title {
+    color: var(--text-primary);
+}
+
+
+/* =========================
+   CONTACT
+   ========================= */
+
+.contact .contact-form-card,
+.contact .contact-info-card {
+    background: var(--dark-card);
+    color: var(--text-secondary);
+}
+
+.contact-info-card {
+    background: var(--dark-card) !important;
+    border: 1px solid var(--dark-border);
+}
+
+.contact-title {
+    color: var(--text-primary);
+}
+
+.contact h6 {
+    color: var(--text-primary);
+}
+
+
+/* =========================
+   INPUT FIELDS
+   ========================= */
+
+.form-control {
+    background-color: #10161f;
+    color: var(--text-primary);
+    border: 1px solid var(--dark-border);
+}
+
+.form-control:focus {
+    background-color: #10161f;
+    color: var(--text-primary);
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.2rem rgba(248, 92, 112, 0.15);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+
+/* =========================
+   BOOTSTRAP TEXT OVERRIDES
+   ========================= */
+
+.text-dark {
+    color: var(--text-secondary) !important;
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.bg-white {
+    background-color: var(--dark-bg) !important;
+}
+
+
+/* =========================
+   SOCIAL ICONS
+   ========================= */
+
+.social-icons .social-link {
+    color: var(--text-secondary) !important;
+}
+
+.social-icons .social-link:hover {
+    color: var(--accent) !important;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+    background: #080b10;
+    border-top: 1px solid var(--dark-border);
+}
+
+.footer p {
+    color: var(--text-muted);
+}
+.contact .map iframe,
+.dark-map {
+  filter: grayscale(1) invert(92%) hue-rotate(180deg) contrast(90%) brightness(85%);
+}
+/* =========================================
+   MODERN PROJECT SECTION
+   ========================================= */
+
+   #projects {
+    padding: 80px 0;
+}
+
+#projects h2 {
+    margin-bottom: 30px !important;
+}
+
+
+/* FILTERS */
+
+.portfolio .filters {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+
+    width: fit-content;
+    max-width: 100%;
+
+    margin: 0 0 35px 0;
+    padding: 6px;
+
+    background: #161d27;
+    border: 1px solid #2a3441;
+    border-radius: 12px;
+
+    box-shadow: none;
+}
+
+.portfolio .filters .filter-button {
+    flex: none;
+    width: auto;
+
+    padding: 9px 18px;
+    margin: 0;
+
+    color: #9ca6b4;
+
+    background: transparent;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    transition: all 0.25s ease;
+}
+
+.portfolio .filters .filter-button span {
+    line-height: 1.3;
+}
+
+.portfolio .filters .filter-button::after {
+    display: none;
+}
+
+.portfolio .filters .filter-button:hover {
+    color: #ffffff;
+    background: #1c2532;
+    transform: none;
+}
+
+.portfolio .filters .filter-button.active {
+    color: #ffffff;
+    background: #F85C70;
+
+    animation: none;
+}
+
+
+/* PROJECT GRID */
+
+.portfolio-container {
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.project-column {
+    padding: 12px;
+}
+
+
+/* CARD */
+
+.modern-project-card {
+    height: 100%;
+
+    background: #161d27;
+
+    border: 1px solid #2a3441;
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.modern-project-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(248, 92, 112, 0.55);
+
+    box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+
+/* IMAGE */
+
+.project-image {
+    position: relative;
+
+    height: 210px;
+
+    overflow: hidden;
+
+    background: #10161f;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.45s ease;
+}
+
+.modern-project-card:hover .project-image img {
+    transform: scale(1.04);
+}
+
+
+/* CATEGORY BADGE */
+
+.project-category {
+    position: absolute;
+
+    top: 15px;
+    left: 15px;
+
+    padding: 6px 11px;
+
+    background: rgba(13, 17, 23, 0.86);
+    backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+
+    color: #ffffff;
+
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+}
+
+
+/* CONTENT */
+
+.project-body {
+    padding: 22px;
+}
+
+.project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 12px;
+}
+
+.project-top h3 {
+    margin: 0;
+
+    color: #f0f3f6;
+
+    font-size: 21px;
+    font-weight: 600;
+}
+
+.project-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    background: #10161f;
+
+    border: 1px solid #2a3441;
+    border-radius: 9px;
+
+    color: #b8c0cc;
+
+    font-size: 18px;
+
+    transition: all 0.25s ease;
+}
+
+.project-icon:hover {
+    color: #ffffff;
+
+    background: #F85C70;
+    border-color: #F85C70;
+
+    transform: translateY(-2px);
+}
+
+
+/* DESCRIPTION */
+
+.project-body p {
+    min-height: 48px;
+
+    margin-bottom: 18px;
+
+    color: #9ca6b4;
+
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+
+/* TECHNOLOGY TAGS */
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 20px;
+}
+
+.project-tech span {
+    padding: 5px 9px;
+
+    background: #10161f;
+
+    border: 1px solid #2a3441;
+    border-radius: 6px;
+
+    color: #b8c0cc;
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+/* VIEW PROJECT LINK */
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 8px;
+
+    color: #F85C70;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: gap 0.2s ease,
+                color 0.2s ease;
+}
+
+.project-link:hover {
+    gap: 11px;
+
+    color: #ff7385;
+}
+
+.project-link i {
+    font-size: 11px;
+}
+
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+
+    #projects {
+        padding: 55px 0;
+    }
+
+    .portfolio .filters {
+        width: 100%;
+
+        overflow-x: auto;
+
+        justify-content: flex-start;
+
+        padding: 5px;
+    }
+
+    .portfolio .filters .filter-button {
+        white-space: nowrap;
+
+        font-size: 13px;
+
+        padding: 8px 13px;
+    }
+
+    .project-image {
+        height: 200px;
+    }
+
+    .project-body {
+        padding: 18px;
+    }
+
+    .project-body p {
+        min-height: auto;
+    }
 }
