@@ -11759,7 +11759,7 @@ pre .code {
       -ms-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   -weblit-transform: translate(-50%, -50%);
-  border: 3px solid white;
+  border: 1px ;
   -webkit-transition: .5s !important;
   transition: .5s !important;
   -weblit-transition: .5s !important;
